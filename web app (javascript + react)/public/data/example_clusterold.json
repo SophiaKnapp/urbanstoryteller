@@ -1,0 +1,35 @@
+{
+  "name": "flare",
+  "children": [
+    {
+      "name": "analytics",
+      "children": [
+        {
+          "name": "cluster",
+          "value": 3938
+        },
+        {
+          "name": "BetweennessCentrality", "value": 3534
+        }
+      ]
+    },
+    {
+      "name": "analytics2",
+      "children": [
+        {"name": "CommunityStructure", "value": 200},
+        {"name": "MergeEdge", "value": 743},
+        {"name": "BetweennessCentrality", "value": 3534},
+        {"name": "LinkDistance", "value": 5731}
+      ]
+    },
+    {
+      "name": "cluster 3",
+      "children": [
+          {"name": "CommunityStructure", "value": 200},
+          {"name": "MergeEdge", "value": 743},
+          {"name": "CommunityStrufdcture", "value": 1000},
+          {"name": "MergeEdge", "value": 53}
+      ]
+    }
+  ]
+}

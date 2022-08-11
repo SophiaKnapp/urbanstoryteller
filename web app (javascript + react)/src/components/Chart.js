@@ -1,0 +1,20 @@
+import React, { useEffect, useRef } from 'react';
+import * as d3 from 'd3';
+
+const LineChart = () => {
+
+    const d3Chart = useRef();
+
+    return (
+        <div className="legend">
+            <svg ref={d3Chart}></svg>
+            {/*<div style={{ "--color": '#a50f15' }}>3023 - 6247</div>*/}
+            {/*<div style={{ "--color": '#de2d26' }}>676 - 3022</div>*/}
+            {/*<div style={{ "--color": '#fb6a4a' }}>428 - 675</div>*/}
+            {/*<div style={{ "--color": '#fc9272' }}>236 - 427</div>*/}
+            {/*<div style={{ "--color": '#fcbba1'}}>23 - 235</div>*/}
+            {/*<div style={{ "--color": '#fee5d9' }}>6 - 22</div>*/}
+        </div>
+    );
+}
+export default LineChart;

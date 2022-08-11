@@ -1,0 +1,383 @@
+@import '~antd/dist/antd.css';
+
+.App {
+  text-align: left;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*#map { height: 180px; }*/
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.boxes-layout {
+  position: absolute;
+  z-index: 999;
+  top: 0px;
+  left: 0px;
+  /*right: 20px;*/
+  padding: 20px;
+  /*font-size:12px;*/
+  /*letter-spacing:2px;*/
+  /*background: rgba(0,0,0,0.8);*/
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+/*.boxes {*/
+/*  position: absolute;*/
+/*  z-index: 999;*/
+/*  top: 40px;*/
+/*  left: 0px;*/
+/*  right: 0px;*/
+/*  width: 100%;*/
+
+/*}*/
+
+.card {
+  padding: 3px 20px 20px 20px;
+  background: rgba(255,255,255,0.7);
+  border-radius:10px;
+  box-shadow: 0 0 10px 0 rgba(184, 140, 140, 0.3);
+  /*width: 'intrinsic';*/
+  height: 100%;
+
+}
+
+/*.card .content {*/
+/*  padding: 20px;*/
+/*}*/
+
+/*.card .title {*/
+/*  font-size:15px;*/
+/*}*/
+
+/*.card .description {*/
+/*  font-size:15px;*/
+/*}*/
+
+.instagram-media-container {
+  /*width: 20%;*/
+  /*maxWidth: '80px';*/
+  /*background: aqua;*/
+  /*width: 50%;*/
+  /*!*height: 50%;*!*/
+  /*zoom: 1.5;*/
+
+
+  width: 100% !important;
+  /*max-width: 200px;*/
+  /*width: 80px;*/
+
+  height: 75px;
+  /*padding: 0;*/
+  /*overflow: hidden;*/
+
+}
+
+.instagram-media {
+  /*transform: scale(0.5);*/
+  /*transform-origin: 0 0;*/
+  /*background: aquamarine;*/
+  /*maxWidth: '100px';*/
+  /*transform: scale(0.8);*/
+
+  /*width: 1000px;*/
+  /*height: 800px;*/
+  /*height: 2000px;*/
+  /*border: 0px;*/
+  zoom: 0.55;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 -30%;
+}
+
+.ant-layout, .ant-layout-header, .ant-layout-content, .ant-layout-header, .ant-layout-sider, .ant-layout-footer {
+  background: transparent;
+}
+
+.ant-layout-footer {
+  /*background: green;*/
+  padding: 0 20px 0 0;
+  /*opacity: 0.5;*/
+  /*background-color: rgba(255, 0, 0, 0.5);*/
+}
+
+.ant-layout-header {
+  /*background: blue;*/
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+  padding: 0;
+}
+
+.ant-layout {
+  height: 100%;
+}
+
+.ant-layout-header, .ant-layout-footer, .ant-layout-header, .ant-layout-sider {
+  pointer-events: auto;
+}
+
+.ant-layout-content  {
+  /*pointer-events: none;*/
+  /*height: 500px;*/
+}
+
+.ant-layout-sider {
+  /*top: 20px;*/
+  /*background-color: white';*/
+}
+
+
+.ant-layout {
+  width: 100%;
+  height: 100%;
+  /*HEIGHT: 100%;*/
+}
+
+
+#title {
+  font-size: 50px;
+  color: black;
+  font-weight: 700;
+  font-family: "Impact", "Helvetica Neue";
+  /*Helvetica, Arial, "Lucida Grande", sans-serif;*/
+}
+
+.districttitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.posts-title {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+.label-axis {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 12px;
+}
+
+.label-graph {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 14px;
+}
+
+.line{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px solid lightgray;
+}
+
+/*#title-button {*/
+/*  padding-top: 22px;*/
+/*  color: grey;*/
+/*}*/
+
+
+
+.search-bars {
+  padding: 0;
+  height: 10px;
+}
+
+/*.ant-select-selector {*/
+/*  border-radius: 10px;*/
+/*  height: 50px;*/
+/*  width: 400px;*/
+/*  border-radius: 10px;*/
+/*}*/
+
+.map-tag {
+  /*padding:0;*/
+  /*margin: 0;*/
+  /*margin-top: -10px;*/
+
+
+  /*background: orange;*/
+  border-radius:10px;
+  box-shadow: 0 0 10px 0 rgba(184, 140, 140, 0.3);
+  /*width: intrinsic;*/
+  /*width: auto;*/
+  /*height: 30px;*/
+}
+
+
+
+.map-tag-text {
+  color: white;
+  font-weight: bolder;
+  font-size: 14px;
+
+  /*padding: 10px;*/
+}
+
+.graph-header-text {
+  /*padding: 0;*/
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  /*height: 80%;*/
+}
+
+
+.map-tag-button {
+  height: 10px;
+}
+
+/*.site-tag-plus {*/
+/*  !*background: orange;*!*/
+/*  !*border-style: dashed;*!*/
+/*  border-radius:10px;*/
+/*  box-shadow: 0 0 10px 0 rgba(184, 140, 140, 0.3);*/
+/*  padding: 10px;*/
+/*}*/
+.edit-tag {
+  user-select: none;
+  /*background: orange;*/
+  border-radius:10px;
+  box-shadow: 0 0 10px 0 rgba(184, 140, 140, 0.3);
+  padding: 10px;
+}
+/*.tag-input {*/
+/*  width: 78px;*/
+/*  margin-right: 8px;*/
+/*  vertical-align: top;*/
+/*}*/
+
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #363636 !important;
+  font-weight: 500;
+}
+
+.ant-tabs-ink-bar {
+  position: absolute;
+  background: #000000;
+  pointer-events: none;
+}
+
+
+
+#colorscale {
+  /*background-color: aqua;*/
+  /*background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(230, 70, 111, 1) 100%);*/
+  height: 18px;
+  width: 220px;
+  border-radius: 1px;
+}
+
+#intro-text {
+  font-size: 20px;
+}
+
+#intro {
+  padding: 20px;
+  height: 25vh;
+}
+
+#intro-title {
+  width: 100%;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+
+
+/*#clusterschart {*/
+/*  padding: 20px;*/
+/*  height: 85vh;*/
+/*  width: 100%;*/
+/*  !*height: 65vh;*!*/
+/*  !*width: 610px;*!*/
+/*}*/
+
+
+/*.sider-card-infobox {*/
+/*  !*height: 5vh;*!*/
+/*  padding-left: 15px;*/
+/*  padding-right: 15px;*/
+/*  !*background-color: #61dafb;*!*/
+/*  background: rgba(17,207,197,0.6);*/
+/*  border-radius:10px;*/
+/*  height: 60px;*/
+/*  !*width: 300px;*!*/
+
+/*}*/
+
+
+.sider-card {
+  padding: 10px;
+  /*height: auto;*/
+  /*background-color: #61dafb;*/
+  /*height: 100%;*/
+}
+
+
+#histogramchart {
+  /*width: 100%;*/
+  /*background-color: aqua;*/
+  height: 75vh;
+  /*height: 100%;*/
+
+}
+
+.svg-class {
+  max-width: 100%;
+  max-height: 100%;
+  /*height: auto;*/
+  /*height: intrinsic;*/
+}
+
+#clusterschart {
+  height: 65vh;
+}
+#skylinechart {
+  width: 100%;
+  /*height: 300px;*/
+  height: 64vh;
+}

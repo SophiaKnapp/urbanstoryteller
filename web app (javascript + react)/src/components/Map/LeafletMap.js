@@ -1,0 +1,126 @@
+import {MapContainer, TileLayer, useMap, GeoJSON, useMapEvents} from 'react-leaflet'
+import React, {useEffect, useState} from "react";
+import './Map.css';
+import L from 'leaflet';
+import {Colors} from "../../assets/colors";
+import {MapState} from "../../App";
+
+
+const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, onMapClick, mapState})=>{
+
+    const fillColor = (isSelected, isHover, state) => {
+        switch (state) {
+            case MapState.postCount:
+                switch (isSelected) {
+                    case true:
+                        return Colors.district;
+                    default:
+                        return Colors.posts;
+                }
+            case MapState.hashtags:
+                switch (isSelected) {
+                    case true:
+                        return Colors.district;
+                    default:
+                        return Colors.hashtags;
+                }
+        }
+        return '';
+    }
+
+    const [onHover, setOnHover] = useState('');
+    const highlightFeature = (e=> {
+        setOnHover(e.target.feature.id);
+    });
+
+    const selectFeature = (e=> {
+        console.log('SELECT FEATURE');
+        console.log(e.target.feature.id);
+        console.log(e.target.feature.id === selectedId);
+        if (e.target.feature.id === selectedId) {
+            setSelectedId(undefined);
+        } else {
+            setSelectedId(e.target.feature.id);
+        }
+    });
+
+    const resetHighlight= (e => {
+        setOnHover('');
+    })
+
+    const onEachFeature= (feature, layer)=> {
+        layer.on({
+            mouseover: highlightFeature,
+            click: selectFeature,
+            mouseout: resetHighlight,
+        });
+    }
+
+    const pointToLayer = (feature, latlng) => {
+
+        const marker = L.marker(latlng, {
+            icon: L.divIcon({
+                className: 'my-div-icon',
+                html: '<span class="map-label">' + feature.id + '</span>'
+            })
+        });
+        return(marker);
+    }
+
+    const style = (feature => {
+        return ({
+            // fillColor: feature.id === selectedId ? Colors.TURQUOISE : Colors.instagramPink,
+            fillColor: fillColor(feature.id === selectedId, feature.id === onHover, mapState),
+            weight: feature.id === selectedId || feature.id === onHover ? 3 : 1,
+            opacity: 1,
+            color: fillColor(feature.id === selectedId, feature.id === onHover, mapState),
+            fillOpacity: feature.id === onHover ? 1 : feature.properties.opacity,
+        });
+    });
+    const geojsonLayer = potatoesWithOpacity.map(feature=>{
+        return(feature);
+    });
+
+    function MapEvents() {
+        const map = useMapEvents({
+            click: () => {
+                onMapClick()
+            },
+        })
+        return null
+    }
+
+    return(
+        <div className='container'>
+            <div className="">
+                <div className="">
+                    <MapContainer zoom={11}
+                                  scrollWheelZoom={true}
+                                  center={[48.1374, 11.750]}>
+                        <TileLayer
+                            // url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
+                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hzfzdb000m14qvl6kfepqg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
+                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hva0ye000615jy1yren5l2/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
+                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hzfzdb000m14qvl6kfepqg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
+                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6j15qd2001214mgsijsplj2/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
+                            url="https://api.mapbox.com/styles/v1/leonie35/cl6jd9wxa005d14nkzj8cvw22/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
+
+                        />
+                        {geojsonLayer && (
+                            <GeoJSON data={geojsonLayer}
+                                     style={style}
+                                     onEachFeature={onEachFeature}
+                            />
+                        )}
+                        {/*<GeoJSON data={markers}*/}
+                        {/*         style={style}*/}
+                        {/*         pointToLayer={pointToLayer}*/}
+                        {/*/>*/}
+                        <MapEvents/>
+                    </MapContainer>
+                </div>
+            </div>
+        </div>
+    )
+}
+export default LeafletMap;
