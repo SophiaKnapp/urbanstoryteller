@@ -7,3 +7,4 @@ data/raw
 data
 javascript/build
 javascript/node_modules
+**/__pycache__
