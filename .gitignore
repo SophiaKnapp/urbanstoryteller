@@ -1,7 +1,9 @@
-web app (javascript + react)/node_modules
-web app (javascript + react)/node_modules
-web app (javascript + react)/.idea
-web app (javascript + react)/build
-web app (javascript + react)/instagramimage.iml
-web app (javascript + react)/package-lock.json
+javascript/.idea
+javascript/instagramimage.iml
+javascript/package-lock.json
+data/raw
+ __pycache__/
+ *.pyc
 data
+javascript/build
+javascript/node_modules
