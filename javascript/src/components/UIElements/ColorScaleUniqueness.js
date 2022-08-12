@@ -1,6 +1,5 @@
 import {Col, Row} from 'antd';
 import React  from 'react';
-import {MapState} from "../../App";
 import {Colors} from "../../assets/colors";
 
 const ColorScaleUniqueness = () => {
@@ -12,7 +11,6 @@ const ColorScaleUniqueness = () => {
                     {'not unique'}
                 </Col>
                 <Col>
-                    {/*{showRelative? '>' + max.relative * 100 + '%': '> ' + max.absoluteMap + ''}*/}
                     {'very unique'}
                 </Col>
             </Row>

@@ -1,24 +1,7 @@
 
-import { Tag, Tooltip, Row } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import { Tag, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
 import {Colors} from "../../assets/colors";
-
-
-
-
-// export default App;
-// .site-tag-plus {
-//     background: #fff;
-//     border-style: dashed;
-// }
-// .edit-tag {
-//     user-select: none;
-// }
-// .tag-input {
-//     width: 78px;
-//     margin-right: 8px;
-//     vertical-align: top;
-// }
 
 const TagType = {
     DISTRICT: 'district',
@@ -26,23 +9,7 @@ const TagType = {
     CLUSTER: 'cluster'
 }
 
-const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, setSelectedCluster, setSelectedHashtags}) => {
-
-    // const [selectedHashtags, setSelectedHashtags] = useState(['Unremovable', 'Tag 2', 'Tag 3']);
-    // const [inputVisible, setInputVisible] = useState(false);
-    // const [inputValue, setInputValue] = useState('');
-    // const [editInputIndex, setEditInputIndex] = useState(-1);
-    // const [editInputValue, setEditInputValue] = useState('');
-    // const inputRef = useRef(null);
-    // const editInputRef = useRef(null);
-    // useEffect(() => {
-    //     if (inputVisible) {
-    //         inputRef.current?.focus();
-    //     }
-    // }, [inputVisible]);
-    // useEffect(() => {
-    //     editInputRef.current?.focus();
-    // }, [inputValue]);
+const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, setSelectedCluster, removeHashtag}) => {
 
     const handleClose = (removedTag, tagType) => {
         switch (tagType) {
@@ -50,9 +17,7 @@ const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, 
                 setSelectedId(undefined);
                 break;
             case TagType.HASHTAG:
-                let newHashtags = [...selectedHashtags];
-                newHashtags = newHashtags.filter(v => v !== removedTag);
-                setSelectedHashtags(newHashtags);
+                removeHashtag(removedTag)
                 break;
             case TagType.CLUSTER:
                 setSelectedCluster(undefined);
@@ -91,11 +56,9 @@ const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, 
                 })
             })
         }
-
         setTags(newTags);
 
     }, [selectedId, selectedHashtags, selectedCluster])
-
 
 
     return (
@@ -105,7 +68,7 @@ const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, 
                 <Tag
                     className="edit-tag"
                     key={tag.name}
-                    closable={true} // TODO: always closable
+                    closable={true}
                     onClose={() => handleClose(tag.name, tag.type)}
                     style={{background: tag.color}}
                 >

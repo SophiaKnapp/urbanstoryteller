@@ -7,7 +7,6 @@ import {Row, Col, Layout, Tabs} from 'antd';
 import MapTags from "./components/UIElements/MapTags";
 
 import AbsoluteRelativeSwitch from "./components/UIElements/AbsoluteRelativeSwitch";
-import {useMapEvents} from "react-leaflet";
 import {Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import ClustersBox, {BubbleLayout} from "./components/Boxes/ClustersBox";
@@ -35,14 +34,10 @@ function App() {
     const [hoverId, setHoverId] = useState(undefined);
     const [selectedHashtags, setSelectedHashtags] = useState([]);
     const [selectedCluster, setSelectedCluster] = useState(undefined);
-
     const [showRelative, setShowRelative] = useState(false);
     const [max, setMax] = useState({'absolute': 0, 'relative': 0, 'absoluteMap': 0});
-
-    const [countsPerQuarter, setCountsPerQuarter] = useState(CountsPerQuarter(selectedHashtags));
-
+    const [countsPerQuarter, setCountsPerQuarter] = useState(CountsPerQuarter(selectedHashtags, selectedCluster));
     const [mapState, setMapState] = useState(MapState.postCount);
-
 
     function addHashtag(hashtag) {
         let newHashtags = [...selectedHashtags];
@@ -59,22 +54,20 @@ function App() {
     }
 
     useEffect(() => {
-            if (selectedHashtags.length === 0) {
+            if (selectedHashtags.length === 0 && !selectedCluster) {
                 setMapState(MapState.postCount);
             } else {
                 setMapState(MapState.hashtags);
             }
-        }, [selectedHashtags]
+        }, [selectedHashtags, selectedCluster]
     )
 
     useEffect(() => {
-        setCountsPerQuarter(CountsPerQuarter(selectedHashtags));
-        if (selectedHashtags.length === 0) setShowRelative(false);
-    }, [selectedHashtags]);
+        setCountsPerQuarter(CountsPerQuarter(selectedHashtags, selectedCluster));
+    }, [selectedHashtags, selectedCluster]);
 
 
     useEffect(() => {
-        // const attribute = showRelative ? 'relativeAmount' : 'count';
         let valuesAbsolute = Object.keys(countsPerQuarter).map(id => countsPerQuarter[id].count);
         const valuesRelative = Object.keys(countsPerQuarter).map(id => countsPerQuarter[id].relativeAmount);
         const maxAbsolute = Math.max(...valuesAbsolute);
@@ -96,21 +89,6 @@ function App() {
         );
         },[countsPerQuarter]);
 
-    function MapEvents() {
-        const map = useMapEvents({
-            click: () => {
-                // map.locate()
-                console.log("clicked the map");
-            }
-            // locationfound: (location) => {
-            //     console.log('location found:', location)
-            // },
-        })
-        return null
-    }
-
-
-
     return (
         <>
             <div id="map">
@@ -121,7 +99,6 @@ function App() {
                      showRelative={showRelative}
                      max={max}
                      mapState={mapState}
-                     mapEvents={MapEvents}
                 />
             </div>
 
@@ -137,17 +114,15 @@ function App() {
                                 <Row justify="space-between">
                                     <Col span={24}>
                                         <div style={{height: '15px'}}/>
-                                        <MapTags selectedHashtags={selectedHashtags} selectedId={selectedId} selectedCluster={selectedCluster} setSelectedHashtags={setSelectedHashtags} setSelectedId={setSelectedId} setSelectedCluster={setSelectedCluster}/>
+                                        <MapTags selectedHashtags={selectedHashtags} selectedId={selectedId} selectedCluster={selectedCluster} removeHashtag={removeHashtag} setSelectedId={setSelectedId} setSelectedCluster={setSelectedCluster}/>
                                     </Col>
                                 </Row>
                             </Header>
                             <Content></Content>
                             <Footer>
-                                <Row gutter={[16,16]} justify="space-between">
+                                <Row gutter={[16,16]} justify="space-between" align="bottom">
                                 <Col>
-                                    <div hidden={selectedHashtags.length===0}>
-                                    <AbsoluteRelativeSwitch showRelative={showRelative} setShowRelative={setShowRelative}/>
-                                    </div>
+                                    <AbsoluteRelativeSwitch showRelative={showRelative} setShowRelative={setShowRelative} mapState={mapState}/>
                                 </Col>
                                 <Col>
                                     <ColorScale max={max} showRelative={showRelative} mapState={mapState}/>
@@ -173,7 +148,7 @@ function App() {
                                         </TabPane>
 
                                         <TabPane tab="Explore hashtags" key={2}>
-                                            <HashtagSelect setSelectedHashtags={setSelectedHashtags} selectedHashtags={selectedHashtags}/>
+                                            <HashtagSelect addHashtag={addHashtag}/>
                                             {selectedHashtags.length > 0 ? (
                                             <SkylineBox countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId} hoverId={hoverId} setHoverId={setHoverId} ></SkylineBox>
                                             ) :

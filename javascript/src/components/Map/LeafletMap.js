@@ -6,7 +6,7 @@ import {Colors} from "../../assets/colors";
 import {MapState} from "../../App";
 
 
-const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, onMapClick, mapState})=>{
+const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, mapState})=>{
 
     const fillColor = (isSelected, isHover, state) => {
         switch (state) {
@@ -81,15 +81,6 @@ const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, onMapClick,
         return(feature);
     });
 
-    function MapEvents() {
-        const map = useMapEvents({
-            click: () => {
-                onMapClick()
-            },
-        })
-        return null
-    }
-
     return(
         <div className='container'>
             <div className="">
@@ -98,11 +89,6 @@ const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, onMapClick,
                                   scrollWheelZoom={true}
                                   center={[48.1374, 11.750]}>
                         <TileLayer
-                            // url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"
-                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hzfzdb000m14qvl6kfepqg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
-                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hva0ye000615jy1yren5l2/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
-                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6hzfzdb000m14qvl6kfepqg/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
-                            // url="https://api.mapbox.com/styles/v1/leonie35/cl6j15qd2001214mgsijsplj2/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
                             url="https://api.mapbox.com/styles/v1/leonie35/cl6jd9wxa005d14nkzj8cvw22/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibGVvbmllMzUiLCJhIjoiY2w2Z2xxcjMwMDAyczNjcGt6MjU5Z2xwNyJ9.ZwNjh5NstxlW2iTC7HE1cg"
 
                         />
@@ -112,11 +98,6 @@ const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, onMapClick,
                                      onEachFeature={onEachFeature}
                             />
                         )}
-                        {/*<GeoJSON data={markers}*/}
-                        {/*         style={style}*/}
-                        {/*         pointToLayer={pointToLayer}*/}
-                        {/*/>*/}
-                        <MapEvents/>
                     </MapContainer>
                 </div>
             </div>

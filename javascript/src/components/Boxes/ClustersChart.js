@@ -1,8 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import '../../App.css';
-import Card from '../UIElements/Card';
 import * as d3 from "d3";
-import {Col, Radio, Row} from "antd";
 import {Colors} from "../../assets/colors";
 import {BubbleLayout} from "./ClustersBox";
 import {Sizes} from "../../assets/constants";
@@ -10,8 +8,6 @@ import {Sizes} from "../../assets/constants";
 
 
 const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag, bubbleLayout, selectedCluster, setSelectedCluster}) => {
-    // const ClustersChart = ({selectedId, selectedHashtags, setSelectedHashtags, bubbleLayout}) => {
-
 
     const d3Chart = useRef();
 
@@ -51,18 +47,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     const marginBottom = 0;
     const padding = 3;
 
-
-
-    const fill = "#ccc";
-
-    const stroke = 1;
-    const strokeWidth = 1;
-    const fillOpacity = 0.7;
-
-
-    const factorFontSize = 0.8;
-    const factorViewBox = 1.3;
-    const factorZoom = 2.4;
     const nx = 5;
     const fontSize = 14;
     const fontSizeSmall = 10;
@@ -164,8 +148,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
         .style("display", (d) => bubbleLayout === BubbleLayout.CLUSTER && (!focus || (selectedCluster && selectedCluster.name === d.data.name)) ? 'inline' : 'none')
         .on("mouseover", focus ? null : function() { d3.select(this).attr("stroke", Colors.cluster); })
         .on("mouseout", function() { d3.select(this).attr("stroke", null); })
-        // .on("mouseover", isZoomed ? null :function() { d3.select(this).attr("stroke-width", '5px'); })
-        // .on("mouseout", function() { d3.select(this).attr("stroke-width", 1); })
         .on("click", (event, d) => {
             setFocus(d);
         });
@@ -182,49 +164,8 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
             .text((d) => cutIfNeeded(d.data.name));
 
 
-    // Legend
-
-    // const legendBubble =
-    //     svg
-    //         .append('circle')
-    //         .attr("class", "legend-bubble")
-    //         .attr("fill", 'none')
-    //         .attr("stroke", Colors.district)
-    //         .attr("stroke-width", '3px')
-    //         .attr("r", d => legendHeight )
-    //         .attr('cx', marginLeft-20)
-    //         .attr('cy', height - legendHeight - marginBottom- 15);
-
-
-    // svg.append("text")
-    //     .data(legendUserCount)
-    //     .attr("class", "label-axis")
-    //     .attr("text-anchor", "end")
-    //     .attr("x", marginLeft + legendHeight + 15)
-    //     .attr("y",height - legendHeight - marginBottom- 15)
-    //     .text((d) => d.count)
-
-        // })
-        // .attr("fill-opacity", (d) => opacityScale(d.uniqueness))
-        // .attr("r", (d) => {
-        //     return d.radius*xScale.bandwidth()/2;
-        // })
-        // .style("display", (d) => bubbleLayout === BubbleLayout.CLUSTER && selectedCluster !== undefined && selectedCluster.name !== d.cluster && focus ? 'none' : 'inline')
-        // .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
-        // .on("mouseout", function() { d3.select(this).attr("stroke", null); })
-        // .on("click", (event, d) => {
-        //     let newHashtags = [...selectedHashtags];
-        //     if (newHashtags.includes(d.hashtag)) {
-        //         newHashtags = newHashtags.filter(v => v !== d.hashtag);
-        //     } else {
-        //         newHashtags.push(d.hashtag);
-        //     }
-        //     setSelectedHashtags(newHashtags);
-        // });
-
     useEffect(() => {
         if (bubbleLayout === BubbleLayout.CLUSTER) {
-            // if (!isZoomed) {
             if (!focus && prevFocus) {
                 console.log(prevFocus);
                 svg.transition()
@@ -252,6 +193,14 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
             }
         }
     }, [focus])
+
+    useEffect(() => {
+        if(!selectedCluster) {
+            setFocus(undefined)
+        }
+    }, [selectedCluster])
+
+
 
     function zoomTo(v, offsetWidth, offsetHeight) {
         const k = width/ v[2];
@@ -282,8 +231,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
 
     useEffect(() => {
         console.log('updating layout');
-
-
         if (bubbleLayout === BubbleLayout.COUNT || bubbleLayout === BubbleLayout.UNIQUENESS) {
             setSelectedCluster(undefined);
             setFocus(undefined);

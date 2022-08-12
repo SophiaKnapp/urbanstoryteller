@@ -14,7 +14,7 @@ const ColorScale = ({max, showRelative, mapState}) => {
                     0
                 </Col>
                 <Col>
-                    {showRelative? '>' + max.relative * 100 + '%': '> ' + max.absoluteMap + ''}
+                    {showRelative && mapState === MapState.hashtags? '> ' + max.relative * 100 + '%': '> ' + max.absoluteMap + ''}
                 </Col>
             </Row>
             <Row>
