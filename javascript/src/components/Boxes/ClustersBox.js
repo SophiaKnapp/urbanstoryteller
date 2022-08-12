@@ -9,7 +9,6 @@ import {Colors} from "../../assets/colors";
 import ColorScaleUniqueness from "../UIElements/ColorScaleUniqueness";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 
-
 export const BubbleLayout = {
     COUNT: 'count',
     UNIQUENESS: 'uniqueness',
@@ -20,7 +19,6 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
 
 
     const [stats, setStats] = useState(undefined);
-
 
     useEffect(() => {
         if (selectedId) {
@@ -33,35 +31,7 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
     }, [selectedId])
 
 
-    const { TabPane } = Tabs;
-
     const [bubbleLayout, setBubbleLayout] = useState(BubbleLayout.COUNT);
-
-
-
-    // if (data) {
-    //     svg
-    //         .data(selectedId)
-    //         .append('circle')
-    //         .attr("class", "legend-bubble")
-    //         .attr("fill", 'none')
-    //         .attr("stroke", Colors.district)
-    //         .attr("stroke-width", '3px')
-    //         .attr("r", d => legendHeight )
-    //         .attr('cx', marginLeft-20)
-    //         .attr('cy', height - legendHeight - marginBottom- 15);
-    //
-    //
-    // svg.append("text")
-    // .data(legendUserCount)
-    // .attr("class", "label-axis")
-    // .attr("text-anchor", "end")
-    // .attr("x", marginLeft + legendHeight + 12)
-    // .attr("y",height - legendHeight - marginBottom- 15)
-    // .text((d) => d.count + ' users talking about this')
-    //
-    // }
-
 
 
     return (
@@ -74,16 +44,14 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
                                 <DistrictSelect selectedId={selectedId} setSelectedId={setSelectedId} />
                             </Col>
                             <Col offset={1} span={15} >
-                                {/*<div style={{background: 'green', marginRight:'50px'}}>*/}
-                                    <Radio.Group  disabled={selectedId===undefined} value={bubbleLayout} onChange={e => {
-                                        setBubbleLayout(e.target.value);
-                                    }
-                                    }>
-                                        <Radio.Button value={BubbleLayout.COUNT}>Most frequent</Radio.Button>
-                                        <Radio.Button value={BubbleLayout.UNIQUENESS}>Most unique</Radio.Button>
-                                        <Radio.Button value={BubbleLayout.CLUSTER}>Stories</Radio.Button>
-                                    </Radio.Group>
-                                {/*</div>*/}
+                                <Radio.Group  disabled={selectedId===undefined} value={bubbleLayout} onChange={e => {
+                                    setBubbleLayout(e.target.value);
+                                }
+                                }>
+                                    <Radio.Button value={BubbleLayout.COUNT}>Most frequent</Radio.Button>
+                                    <Radio.Button value={BubbleLayout.UNIQUENESS}>Most unique</Radio.Button>
+                                    <Radio.Button value={BubbleLayout.CLUSTER}>Stories</Radio.Button>
+                                </Radio.Group>
                             </Col>
                         </Row>
                     </Col>
@@ -97,9 +65,6 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
                     { stats && (
                         <>
                             <Layout>
-                                {/*<Header>*/}
-                                {/*    */}
-                                {/*</Header>*/}
                                 <Content>
                                     <div className='graph-header-text'>
                                         {'Found '}
@@ -119,7 +84,6 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
                                 </Footer>
                             </Layout>
                         </>
-
                         )
                     }
                 <Row>

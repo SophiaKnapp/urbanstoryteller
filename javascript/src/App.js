@@ -19,7 +19,7 @@ import CountsPerQuarter from "./utils/CountsPerQuarter";
 import SkylineBox from "./components/Boxes/SkylineBox";
 import {Texts} from "./assets/texts";
 import {Sizes} from "./assets/constants";
-import HashtagSelect2 from "./components/UIElements/HashtagSelect2";
+import HashtagSelect from "./components/UIElements/HashtagSelect";
 import Posts from "./components/Boxes/Posts";
 
 export const MapState = {
@@ -83,20 +83,9 @@ function App() {
 
         valuesAbsolute = valuesAbsolute.filter((v) => v!==maxAbsolute);
         const secondMaxAbsolute = Math.max(...valuesAbsolute);
-        console.log("maxAbsolute");
-        console.log(maxAbsolute);
-        console.log(secondMaxAbsolute);
-
         const maxAbsoluteRounded = Math.ceil(maxAbsolute/100)*100;
-
-        // const maxAbsoluteRoundedMap =  Math.ceil((secondMaxAbsolute+(maxAbsolute-secondMaxAbsolute)/2)/100)*100
         const maxAbsoluteRoundedMap =  Math.ceil((secondMaxAbsolute+(maxAbsolute-secondMaxAbsolute)/5)/100)*100
 
-
-        console.log(maxAbsoluteRoundedMap);
-
-        // console.log(valuesAbsolute.slice(0,valuesAbsolute.length-1));
-        // console.log(valuesAbsolute.filter((v) => v!==maxAbsolute));
 
         setMax(
             {
@@ -105,11 +94,6 @@ function App() {
                 'absoluteMap': maxAbsoluteRoundedMap,
             }
         );
-        // if (!showRelative) {
-        //     setMax(Math.ceil(maxValue/100)*100);
-        // } else {
-        //     setMax(Math.ceil(maxValue*100)/100);
-        // }
         },[countsPerQuarter]);
 
     function MapEvents() {
@@ -134,7 +118,6 @@ function App() {
                      selectedId={selectedId}
                      potatoes={data.features}
                      countsPerQuarter={countsPerQuarter}
-                     // markers={markers.features}
                      showRelative={showRelative}
                      max={max}
                      mapState={mapState}
@@ -152,9 +135,6 @@ function App() {
                                     <span>{Texts.title}</span>
                                 </div>
                                 <Row justify="space-between">
-                                    {/*<Col span={8}>*/}
-                                    {/*    <DistrictSelect selectedId={selectedId} setSelectedId={setSelectedId} />*/}
-                                    {/*</Col>*/}
                                     <Col span={24}>
                                         <div style={{height: '15px'}}/>
                                         <MapTags selectedHashtags={selectedHashtags} selectedId={selectedId} selectedCluster={selectedCluster} setSelectedHashtags={setSelectedHashtags} setSelectedId={setSelectedId} setSelectedCluster={setSelectedCluster}/>
@@ -183,8 +163,6 @@ function App() {
                             <Sider  width={Sizes.siderWidth} >
 
                                 <Card>
-
-                                    {/*<div className="line"></div>*/}
                                     <Tabs defaultActiveKey="1" id="mytabs">
 
                                         <TabPane tab="About" key={1}>
@@ -195,10 +173,7 @@ function App() {
                                         </TabPane>
 
                                         <TabPane tab="Explore hashtags" key={2}>
-                                            <HashtagSelect2 setSelectedHashtags={setSelectedHashtags} selectedHashtags={selectedHashtags}/>
-                                            {/*<span>*/}
-                                            {/*    {Texts.hashtags}*/}
-                                            {/*</span>*/}
+                                            <HashtagSelect setSelectedHashtags={setSelectedHashtags} selectedHashtags={selectedHashtags}/>
                                             {selectedHashtags.length > 0 ? (
                                             <SkylineBox countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId} hoverId={hoverId} setHoverId={setHoverId} ></SkylineBox>
                                             ) :

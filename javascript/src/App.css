@@ -115,16 +115,6 @@
 }
 
 .instagram-media {
-  /*transform: scale(0.5);*/
-  /*transform-origin: 0 0;*/
-  /*background: aquamarine;*/
-  /*maxWidth: '100px';*/
-  /*transform: scale(0.8);*/
-
-  /*width: 1000px;*/
-  /*height: 800px;*/
-  /*height: 2000px;*/
-  /*border: 0px;*/
   zoom: 0.55;
   -moz-transform: scale(0.5);
   -moz-transform-origin: 0 0;
@@ -139,15 +129,10 @@
 }
 
 .ant-layout-footer {
-  /*background: green;*/
   padding: 0 20px 0 0;
-  /*opacity: 0.5;*/
-  /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
 .ant-layout-header {
-  /*background: blue;*/
-  /*background-color: rgba(0, 0, 0, 0.5);*/
   padding: 0;
 }
 
