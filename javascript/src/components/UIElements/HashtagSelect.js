@@ -7,7 +7,6 @@ const HashtagSelect = ({addHashtag}) => {
     let options = [];
 
     const hashtags = top_hashtags_city.map((d) => d.hashtag);
-    hashtags.sort();
 
     for (let i = 0; i < hashtags.length; i++) {
         options.push(<Option key={hashtags[i]}>{'#' + hashtags[i]}</Option>);
