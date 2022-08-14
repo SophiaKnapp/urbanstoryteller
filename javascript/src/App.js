@@ -149,8 +149,8 @@ function App() {
 
                                         <TabPane tab="Explore hashtags" key={2}>
                                             <HashtagSelect addHashtag={addHashtag}/>
-                                            {selectedHashtags.length > 0 ? (
-                                            <SkylineBox countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId} hoverId={hoverId} setHoverId={setHoverId} ></SkylineBox>
+                                            {selectedHashtags.length > 0 || selectedCluster ? (
+                                            <SkylineBox countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId} selectedHashtags={selectedHashtags} selectedCluster={selectedCluster} ></SkylineBox>
                                             ) :
                                                 (
                                                     <div>

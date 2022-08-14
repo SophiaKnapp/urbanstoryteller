@@ -27,7 +27,7 @@ const HistogramBox = ({setSelectedId}) => {
         .attr("text-anchor", "end")
         .attr("x", width-marginRight)
         .attr("y",0)
-        .text('Users talking about this')
+        .text('Instagram users talking about this')
 
     const districtsSorted = posts_users_stories.sort(function (a, b) {
         return a.users - b.users;

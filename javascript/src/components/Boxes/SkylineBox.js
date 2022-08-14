@@ -8,8 +8,9 @@ import { scaleOrdinal } from 'd3-scale';
 import { schemeCategory10 } from 'd3-scale-chromatic';
 import {Colors} from "../../assets/colors";
 import {Sizes} from "../../assets/constants";
+import {Texts} from "../../assets/texts";
 
-const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, hoverId, setHoverId}) => {
+const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedCluster, selectedHashtags}) => {
     const d3Chart = useRef();
     const svg = d3.select(d3Chart.current);
     const width = Sizes.siderWidth;
@@ -153,10 +154,42 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, hoverId, 
             .call(yAxis);
     }, [data]);
 
+
+    const getText = (selectedHashtags, selectedCluster) => {
+        let text = 'The graph shows how many people who mention a district also mention ';
+
+
+        if (selectedHashtags.length === 1) {
+            text += '#' + selectedHashtags[0];
+        } else if (selectedHashtags.length > 1) {
+            text += '#';
+            let exceptLast = selectedHashtags.slice(0, selectedHashtags.length - 1);
+            let hashtagsString = exceptLast.join(', #');
+            hashtagsString += ' or #' + selectedHashtags[selectedHashtags.length - 1];
+            text += hashtagsString;
+        }
+
+
+
+        if (selectedCluster) {
+            if (selectedHashtags.length > 0) {
+                text+= ' or'
+            } else {
+
+            }
+            text += ' hashtags related to story #' + selectedCluster.name;
+        }
+
+        return text;
+    }
+
     // classname does not exist
     return (
 
                 <div id="skylinechart" className="sider-card">
+                    <div>
+                        <div>{getText(selectedHashtags, selectedCluster)}</div>
+                    </div>
                     <svg ref={d3Chart} className="svg-class">
                     </svg>
                 </div>
