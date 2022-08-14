@@ -1,3 +1,3 @@
 # Urban Story Teller - Munich
 
-[Go to the Application](urbanstorytellermunich.web.app)
+Go to application at [urbanstorytellermunich.web.app](urbanstorytellermunich.web.app)
