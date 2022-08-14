@@ -15,7 +15,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
         .domain([0,10])
         .range([0.05, 1])
 
-
     const width = Sizes.siderWidth;
     const [height, setHeight] = useState(0);
 
@@ -25,9 +24,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     const [focus, setFocus] = useState(undefined);
     const [prevFocus, setPrevFocus] = useState(undefined);
     const animationDuration = 500;
-
-
-    const rootView = [width/2, height/2, width];
+    const rootView = [width / 2, height / 2, width];
 
 
     useEffect(() => {
@@ -36,7 +33,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     }, [])
 
 
-    const margin = 15;
     const marginTop = 20;
     const marginLeft = 26;
     const marginRight = 0;
@@ -97,9 +93,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
             }
         })
         .attr("fill-opacity", (d) => opacityScale(d.uniqueness))
-        // .attr("r", (d) => {
-        //     return d.radius*xScale.bandwidth()/2;
-        // })
         .style("display", (d) => bubbleLayout === BubbleLayout.CLUSTER && selectedCluster !== undefined && selectedCluster.name !== d.cluster && focus ? 'none' : 'inline')
         .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
         .on("mouseout", function() { d3.select(this).attr("stroke", null); })
@@ -167,7 +160,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
                 svg.transition()
                     .duration(animationDuration)
                     .tween("zoom", d => {
-                        const i = d3.interpolateZoom([prevFocus.x, prevFocus.y, prevFocus.r * 3], [width / 2, height / 2, width]);
+                        const i = d3.interpolateZoom([prevFocus.x, prevFocus.y, prevFocus.r * 3], rootView);
                         return t => zoomTo(i(t), width / 2, height / 2);
                     });
                 setSelectedCluster(undefined);
@@ -176,7 +169,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
                 svg.transition()
                     .duration(animationDuration)
                     .tween("zoom", d => {
-                        const i = d3.interpolateZoom([width / 2, height / 2, width], [focus.x, focus.y, focus.r * 3]);
+                        const i = d3.interpolateZoom(rootView, [focus.x, focus.y, focus.r * 3]);
                         return t => zoomTo(i(t), width / 2, height / 2);
                     });
 
@@ -342,14 +335,11 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
 
             labels.transition()
                 .duration(animationDuration)
-                // .attr("r", (d => d.r))
                 .attr("transform", (d) => `translate(${d.x},${d.y})`);
 
             labelsSmall.transition()
                 .duration(animationDuration)
                 .attr("transform", (d) => `translate(${d.x+marginLeft},${d.y+marginTop +fontSize/2 })`)
-
-
         }
     },[visibleBubbles])
 
@@ -362,7 +352,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
 
         parentLabels.transition()
             .duration(animationDuration)
-            // .attr("r", (d => d.r))
             .attr("transform", (d) => `translate(${d.x},${d.y})`);
 
     },[parents])

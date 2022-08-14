@@ -1,8 +1,6 @@
-import React, {useEffect, useMemo ,useState} from 'react';
+import React, {useEffect ,useState} from 'react';
 import '../../App.css';
-import Card from '../UIElements/Card';
 import * as d3 from 'd3';
-// import InstagramEmbed from 'react-instagram-embed';
 import { IGEmbed } from 'react-ig-embed';
 import {Col, Row, Pagination} from "antd";
 

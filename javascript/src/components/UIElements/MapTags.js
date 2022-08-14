@@ -1,4 +1,3 @@
-
 import { Tag, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import {Colors} from "../../assets/colors";

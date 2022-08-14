@@ -1,7 +1,5 @@
-import {MapContainer, TileLayer, useMap, GeoJSON, useMapEvents} from 'react-leaflet'
-import React, {useEffect, useState} from "react";
-import './Map.css';
-import L from 'leaflet';
+import {MapContainer, TileLayer, GeoJSON} from 'react-leaflet'
+import React, {useState} from "react";
 import {Colors} from "../../assets/colors";
 import {MapState} from "../../App";
 
@@ -56,20 +54,8 @@ const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, mapState})=
         });
     }
 
-    const pointToLayer = (feature, latlng) => {
-
-        const marker = L.marker(latlng, {
-            icon: L.divIcon({
-                className: 'my-div-icon',
-                html: '<span class="map-label">' + feature.id + '</span>'
-            })
-        });
-        return(marker);
-    }
-
     const style = (feature => {
         return ({
-            // fillColor: feature.id === selectedId ? Colors.TURQUOISE : Colors.instagramPink,
             fillColor: fillColor(feature.id === selectedId, feature.id === onHover, mapState),
             weight: feature.id === selectedId || feature.id === onHover ? 3 : 1,
             opacity: 1,

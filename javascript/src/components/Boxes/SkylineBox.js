@@ -1,14 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import '../../App.css';
-import Card from '../UIElements/Card';
 import * as d3 from "d3";
-import WordCloud from 'react-d3-cloud';
-import { scaleOrdinal } from 'd3-scale';
-
-import { schemeCategory10 } from 'd3-scale-chromatic';
 import {Colors} from "../../assets/colors";
 import {Sizes} from "../../assets/constants";
-import {Texts} from "../../assets/texts";
 
 const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedCluster, selectedHashtags}) => {
     const d3Chart = useRef();
@@ -18,18 +12,14 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
 
     const [data, setData] = useState([]);
 
-    const margin = 0;
     const marginTop = 20;
     const marginBottom = 30;
     const marginLeft = 35;
     const marginRight = 20;
-    const yPadding = 0.1;
-    const fontSize = 10;
 
     svg.attr("width", width)
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
-        // .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
     const bars = svg.selectAll('.bar')
         .data(data, (d) => d.quarter)
@@ -44,20 +34,14 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
         .on("mouseover", function() { d3.select(this).attr("fill-opacity", 0.1); })
         .on("mouseout", function() { d3.select(this).attr("fill-opacity", 0.01); })
         .on("click", (event, d) => setSelectedId(d.quarter));
-        // .attr("height",  yScale.bandwidth())
-
 
     const labels = svg.selectAll('.label-graph')
         .data(data, (d) => d.quarter)
         .join('text')
         .attr("class", "label-graph")
-        // .style("font", `${fontSize}px HelveticaNeue-Light`)
-        // .style("display", (d) => bubbleLayout === BubbleLayout.CLUSTER && selectedCluster !== d.cluster ? 'none' : 'inline')
         .attr("pointer-events", "none")
         .text((d) => `#${d.quarter}`)
         .attr("text-anchor", "end")
-        // .attr("x", marginLeft)
-        // .attr("y", height-marginBottom)
 
 
     svg.append("text")
@@ -75,9 +59,7 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
         .text('% of users');
 
     useEffect(() => {
-        // setWidth(parseInt(d3.select('#skylinechart').style('width'))); // INFLUENCES FONT SIZE, not where the bubbles go
         setHeight(parseInt(d3.select('#skylinechart').style('height')));
-        // setHeight(500);
         const dataArray = [];
 
         console.log('updating ABSOLUTE RELATIVE')
@@ -104,7 +86,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
 
 
     }, [max])
-    // TODO: nur max genug?
 
     useEffect(() => {
         d3.selectAll("#skylinechart > svg > g").remove();
@@ -120,7 +101,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
             const xRange = [marginLeft, width - marginRight];
             const xScale = d3.scaleLinear(xDomain, xRange);
             const xAxis = d3.axisBottom(xScale);
-                // .ticks(width / 80);
 
             svg.append("g")
                 .attr("transform", `translate(0,${height-marginBottom})`)
@@ -147,7 +127,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
 
 
         }
-        // TODO: refactor (könnte draußen sein)
         svg.append("g")
             .attr("transform", `translate(${marginLeft},0)`)
             .call(yAxis);
@@ -182,7 +161,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
         return text;
     }
 
-    // classname does not exist
     return (
 
                 <div id="skylinechart" className="sider-card">

@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import '../../App.css';
-import {Col, Radio, Row, Typography, Tabs, Layout} from "antd";
+import {Col, Radio, Row, Layout} from "antd";
 import ClustersChart from "./ClustersChart";
 import DistrictSelect from "../UIElements/DistrictSelect";
 import posts_users_stories from '../../assets/posts_users_stories.json';
 import {Texts} from "../../assets/texts";
-import {Colors} from "../../assets/colors";
 import ColorScaleUniqueness from "../UIElements/ColorScaleUniqueness";
-import {Content, Footer, Header} from "antd/es/layout/layout";
+import {Content, Footer} from "antd/es/layout/layout";
 
 export const BubbleLayout = {
     COUNT: 'count',
@@ -36,7 +35,6 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
 
     return (
             <div className='sider-card'>
-                {/*<div >*/}
                 <Row>
                     <Col span={24}>
                         <Row justify="space-between" >
