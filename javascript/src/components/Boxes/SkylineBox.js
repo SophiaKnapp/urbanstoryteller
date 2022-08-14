@@ -91,7 +91,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
             }));
 
 
-        console.log(dataArray);
         dataArray.sort(function(a, b) {
             return b.relativeAmount * b.count - a.relativeAmount * a.count;
         });

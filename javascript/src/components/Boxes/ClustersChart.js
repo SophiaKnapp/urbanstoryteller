@@ -15,7 +15,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
         .domain([0,10])
         .range([0.05, 1])
 
-    const legendHeight = 15;
 
     const width = Sizes.siderWidth;
     const [height, setHeight] = useState(0);
@@ -25,10 +24,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     const [parents, setParents] = useState([]);
     const [focus, setFocus] = useState(undefined);
     const [prevFocus, setPrevFocus] = useState(undefined);
-
-    const [animationDuration, setAnimationDuration] = useState(500); // TODO: not use when first loaded
-
-
+    const animationDuration = 500;
 
 
     const rootView = [width/2, height/2, width];
@@ -101,9 +97,9 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
             }
         })
         .attr("fill-opacity", (d) => opacityScale(d.uniqueness))
-        .attr("r", (d) => {
-            return d.radius*xScale.bandwidth()/2;
-        })
+        // .attr("r", (d) => {
+        //     return d.radius*xScale.bandwidth()/2;
+        // })
         .style("display", (d) => bubbleLayout === BubbleLayout.CLUSTER && selectedCluster !== undefined && selectedCluster.name !== d.cluster && focus ? 'none' : 'inline')
         .on("mouseover", function() { d3.select(this).attr("stroke", "#000"); })
         .on("mouseout", function() { d3.select(this).attr("stroke", null); })
@@ -210,7 +206,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
         bubbles.attr("transform", (d) => `translate(${(d.x-v[0])*k+offsetWidth},${(d.y-v[1])*k+offsetHeight})`);
         parentBubbles.attr("r", d => d.r*k );
         parentBubbles.attr("transform", (d) => `translate(${(d.x-v[0])*k+offsetWidth},${(d.y-v[1])*k+offsetHeight})`);
-
     }
 
     useEffect(() => {
@@ -232,6 +227,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     useEffect(() => {
         console.log('updating layout');
         if (bubbleLayout === BubbleLayout.COUNT || bubbleLayout === BubbleLayout.UNIQUENESS) {
+            console.log('updating layout count');
             setSelectedCluster(undefined);
             setFocus(undefined);
             setPrevFocus(undefined);
@@ -265,6 +261,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
 
 
         } else {
+            console.log('updating layout other');
             const dataPointsInCluster = data.filter((d) => {
                     return d.cluster !== "";
                 });
@@ -322,9 +319,11 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
 
 
     useEffect(()=> {
+        console.log('bubbles changed');
         if (bubbleLayout === BubbleLayout.COUNT || bubbleLayout === BubbleLayout.UNIQUENESS) {
             bubbles.transition()
                 .duration(animationDuration)
+                .attr("r", (d) => d.radius*xScale.bandwidth()/2)
                 .attr("transform", (d) => `translate(${d.x+marginLeft},${d.y+marginTop})`)
 
             labels.transition()
