@@ -5,7 +5,7 @@ import {Colors} from "../../assets/colors";
 import posts_users_stories from '../../assets/posts_users_stories.json';
 import {Sizes} from "../../assets/constants";
 
-const HistogramBox = ({setSelectedId}) => {
+const HistogramBox = ({selectedId, setSelectedId}) => {
     const d3Chart = useRef();
     const svg = d3.select(d3Chart.current);
 
@@ -59,7 +59,7 @@ const HistogramBox = ({setSelectedId}) => {
         .data(districtsSorted)
         .join('rect')
         .attr("class", "bar")
-        .attr("fill", Colors.posts)
+        .attr("fill", d => selectedId === d.quarter ? Colors.district : Colors.posts)
         .attr("x", marginLeft)
         .attr("y", d => yScale(d.quarter))
         .attr("height",  yScale.bandwidth())
