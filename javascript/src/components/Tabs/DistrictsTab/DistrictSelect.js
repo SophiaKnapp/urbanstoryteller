@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 import React from 'react';
-import posts_users_stories from '../../assets/posts_users_stories.json';
+import posts_users_stories from '../../../assets/posts_users_stories.json';
 
 
 const { Option } = Select;

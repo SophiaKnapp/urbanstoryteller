@@ -3,7 +3,7 @@ import React  from 'react';
 import {MapState} from "../../App";
 import {Colors} from "../../assets/colors";
 
-const ColorScale = ({max, showRelative, mapState}) => {
+const ColorScaleMap = ({max, showRelative, mapState}) => {
     return (
         <div>
             <Row justify="end">
@@ -22,9 +22,8 @@ const ColorScale = ({max, showRelative, mapState}) => {
                         mapState === MapState.hashtags ? Colors.hashtags : Colors.posts
                     } 100%)`}}></div>
             </Row>
-
         </div>
     );
 }
 
-export default ColorScale;
+export default ColorScaleMap;

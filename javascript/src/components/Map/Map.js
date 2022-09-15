@@ -14,10 +14,8 @@ const Map = ({setSelectedId, selectedId, potatoes, countsPerQuarter, showRelativ
         .range([0.05, 1])
 
     useEffect(() => {
-        console.log("updating map...");
         const attribute = showRelative && mapState === MapState.hashtags ? 'relativeAmount' : 'count';
         let newPotatoes = [];
-
         const quarterCounts = {}
 
         Object.keys(countsPerQuarter).map((id) => {
@@ -35,7 +33,6 @@ const Map = ({setSelectedId, selectedId, potatoes, countsPerQuarter, showRelativ
         }
         setPotatoesWithOpacity(newPotatoes);
     }, [showRelative, max])
-
 
 
     return (

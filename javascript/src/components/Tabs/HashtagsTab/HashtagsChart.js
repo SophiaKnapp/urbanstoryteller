@@ -1,10 +1,10 @@
 import React, {useRef, useEffect, useState} from 'react';
-import '../../App.css';
+import '../../../App.css';
 import * as d3 from "d3";
-import {Colors} from "../../assets/colors";
-import {Sizes} from "../../assets/constants";
+import {Colors} from "../../../assets/colors";
+import {Sizes} from "../../../assets/constants";
 
-const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedCluster, selectedHashtags}) => {
+const HashtagsChart = ({countsPerQuarter, max, selectedId, setSelectedId, selectedCluster, selectedHashtags}) => {
     const d3Chart = useRef();
     const svg = d3.select(d3Chart.current);
     const width = Sizes.siderWidth;
@@ -61,9 +61,6 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
     useEffect(() => {
         setHeight(parseInt(d3.select('#skylinechart').style('height')));
         const dataArray = [];
-
-        console.log('updating ABSOLUTE RELATIVE')
-
 
         Object.keys(countsPerQuarter)
             .map(id => dataArray.push({
@@ -173,4 +170,4 @@ const SkylineBox = ({countsPerQuarter, max, selectedId, setSelectedId, selectedC
 
     );
 }
-export default SkylineBox;
+export default HashtagsChart;

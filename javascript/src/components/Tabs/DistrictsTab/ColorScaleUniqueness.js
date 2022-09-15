@@ -1,6 +1,6 @@
 import {Col, Row} from 'antd';
 import React  from 'react';
-import {Colors} from "../../assets/colors";
+import {Colors} from "../../../assets/colors";
 
 const ColorScaleUniqueness = () => {
     return (

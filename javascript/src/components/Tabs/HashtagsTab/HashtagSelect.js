@@ -1,6 +1,6 @@
 import {Select} from 'antd';
 import React from 'react';
-import top_hashtags_city from '../../assets/top_hashtags_city.json';
+import top_hashtags_city from '../../../assets/top_hashtags_city.json';
 const { Option } = Select;
 
 const HashtagSelect = ({addHashtag}) => {

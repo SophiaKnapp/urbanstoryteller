@@ -5,7 +5,7 @@ import {MapState} from "../../App";
 const AbsoluteRelativeSwitch = ({showRelative, setShowRelative, mapState}) => {
     return (
         <Radio.Group value={showRelative ? "relative" : "absolute"} onChange={e => {
-                if (e.target.value == "absolute") {
+                if (e.target.value === "absolute") {
                     setShowRelative(false);
                 } else {
                     setShowRelative(true);

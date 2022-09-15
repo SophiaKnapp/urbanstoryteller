@@ -1,11 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react';
-import '../../App.css';
+import '../../../App.css';
 import * as d3 from "d3";
-import {Colors} from "../../assets/colors";
-import posts_users_stories from '../../assets/posts_users_stories.json';
-import {Sizes} from "../../assets/constants";
+import {Colors} from "../../../assets/colors";
+import posts_users_stories from '../../../assets/posts_users_stories.json';
+import {Sizes} from "../../../assets/constants";
 
-const HistogramBox = ({selectedId, setSelectedId}) => {
+const UserCountChart = ({selectedId, setSelectedId}) => {
     const d3Chart = useRef();
     const svg = d3.select(d3Chart.current);
 
@@ -40,8 +40,6 @@ const HistogramBox = ({selectedId, setSelectedId}) => {
     const yRange = [height - marginBottom, marginTop];
     const yScale = d3.scaleBand(yDomain, yRange).paddingInner(yPadding);
     const yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickFormat(d => '#' + d);
-
-
     const X = districtsSorted.map((d) => d.users);
     const xDomain = [0,d3.max(X)];
     const xRange = [marginLeft, width - marginRight];
@@ -89,4 +87,4 @@ const HistogramBox = ({selectedId, setSelectedId}) => {
             </div>
     );
 }
-export default HistogramBox;
+export default UserCountChart;

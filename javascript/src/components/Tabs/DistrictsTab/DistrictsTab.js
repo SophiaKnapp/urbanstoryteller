@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import '../../App.css';
+import '../../../App.css';
 import {Col, Radio, Row, Layout} from "antd";
 import ClustersChart from "./ClustersChart";
-import DistrictSelect from "../UIElements/DistrictSelect";
-import posts_users_stories from '../../assets/posts_users_stories.json';
-import {Texts} from "../../assets/texts";
-import ColorScaleUniqueness from "../UIElements/ColorScaleUniqueness";
+import DistrictSelect from "./DistrictSelect";
+import posts_users_stories from '../../../assets/posts_users_stories.json';
+import {Texts} from "../../../assets/texts";
+import ColorScaleUniqueness from "./ColorScaleUniqueness";
 import {Content, Footer} from "antd/es/layout/layout";
 
 export const BubbleLayout = {
@@ -14,8 +14,7 @@ export const BubbleLayout = {
     CLUSTER: 'cluster'
 }
 
-const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, removeHashtag, selectedCluster, setSelectedCluster}) => {
-
+const DistrictsTab = ({selectedId, setSelectedId, selectedHashtags, addHashtag, removeHashtag, selectedCluster, setSelectedCluster}) => {
 
     const [stats, setStats] = useState(undefined);
 
@@ -91,4 +90,4 @@ const ClustersBox = ({selectedId, setSelectedId, selectedHashtags, addHashtag, r
             </div>
     )
 }
-export default ClustersBox;
+export default DistrictsTab;

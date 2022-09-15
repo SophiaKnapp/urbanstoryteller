@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import { IGEmbed } from 'react-ig-embed';
 import {Col, Row, Pagination} from "antd";
 
-const Posts = ({selectedId, selectedHashtags, selectedCluster}) => {
+const PostsView = ({selectedId, selectedHashtags, selectedCluster}) => {
 
     const [urls, setUrls] = useState([]);
     const [cols, setCols] = useState(<></>);
@@ -156,4 +156,4 @@ const Posts = ({selectedId, selectedHashtags, selectedCluster}) => {
         </div>
     );
 }
-export default Posts;
+export default PostsView;

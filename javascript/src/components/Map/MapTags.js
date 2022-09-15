@@ -21,6 +21,8 @@ const MapTags = ({selectedHashtags, selectedId, selectedCluster, setSelectedId, 
             case TagType.CLUSTER:
                 setSelectedCluster(undefined);
                 break;
+            default:
+                break;
 
         }
     };

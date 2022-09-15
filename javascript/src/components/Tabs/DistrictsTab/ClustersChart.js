@@ -1,9 +1,9 @@
 import React, {useRef, useEffect, useState} from 'react';
-import '../../App.css';
+import '../../../App.css';
 import * as d3 from "d3";
-import {Colors} from "../../assets/colors";
-import {BubbleLayout} from "./ClustersBox";
-import {Sizes} from "../../assets/constants";
+import {Colors} from "../../../assets/colors";
+import {BubbleLayout} from "./DistrictsTab";
+import {Sizes} from "../../../assets/constants";
 
 
 
@@ -38,7 +38,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     const marginRight = 0;
     const marginBottom = 0;
     const padding = 3;
-
     const nx = 5;
     const fontSize = 14;
     const fontSizeSmall = 10;
@@ -75,7 +74,7 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
     svg
         .attr("viewBox", [-marginLeft, -marginTop, width, height])
         .style("display", "block")
-        .on("click", (event) => {
+        .on("click", () => {
             if (bubbleLayout === BubbleLayout.CLUSTER && selectedCluster !== undefined) {
                 setFocus(undefined);
             }
@@ -188,8 +187,6 @@ const ClustersChart = ({selectedId, selectedHashtags, addHashtag, removeHashtag,
             setFocus(undefined)
         }
     }, [selectedCluster])
-
-
 
     function zoomTo(v, offsetWidth, offsetHeight) {
         const k = width/ v[2];

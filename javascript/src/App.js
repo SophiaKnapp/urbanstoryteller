@@ -3,23 +3,19 @@ import Map from "./components/Map/Map";
 import {useEffect, useState} from "react";
 import data from './assets/potatoes.json';
 import {Row, Col, Layout, Tabs} from 'antd';
-
-import MapTags from "./components/UIElements/MapTags";
-
-import AbsoluteRelativeSwitch from "./components/UIElements/AbsoluteRelativeSwitch";
+import MapTags from "./components/Map/MapTags";
+import AbsoluteRelativeSwitch from "./components/Map/AbsoluteRelativeSwitch";
 import {Content, Footer, Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import ClustersBox, {BubbleLayout} from "./components/Boxes/ClustersBox";
-import ColorScale from "./components/UIElements/ColorScale";
-import HistogramBox from "./components/Boxes/HistogramBox";
-import Card from "./components/UIElements/Card"
-
+import DistrictsTab from "./components/Tabs/DistrictsTab/DistrictsTab";
+import ColorScaleMap from "./components/Map/ColorScaleMap";
+import Card from "./utils/Card"
 import CountsPerQuarter from "./utils/CountsPerQuarter";
-import SkylineBox from "./components/Boxes/SkylineBox";
 import {Texts} from "./assets/texts";
 import {Sizes} from "./assets/constants";
-import HashtagSelect from "./components/UIElements/HashtagSelect";
-import Posts from "./components/Boxes/Posts";
+import PostsView from "./components/PostsView/PostsView";
+import HashtagsTab from "./components/Tabs/HashtagsTab/HashtagsTab";
+import AboutTab from "./components/Tabs/AboutTab/AboutTab";
 
 export const MapState = {
     postCount: 'post count',
@@ -31,7 +27,6 @@ function App() {
     const { TabPane } = Tabs;
 
     const [selectedId, setSelectedId] = useState(undefined);
-    const [hoverId, setHoverId] = useState(undefined);
     const [selectedHashtags, setSelectedHashtags] = useState([]);
     const [selectedCluster, setSelectedCluster] = useState(undefined);
     const [showRelative, setShowRelative] = useState(false);
@@ -108,9 +103,13 @@ function App() {
                         <Layout>
                             <Layout>
                             <Header>
-                                <div id="title">
-                                    <span>{Texts.title}</span>
-                                </div>
+                                <Row>
+                                    <Col offset={1}>
+                                        <div id="title">
+                                            <span>{Texts.title}</span>
+                                        </div>
+                                    </Col>
+                                </Row>
                                 <Row justify="space-between">
                                     <Col span={24}>
                                         <div style={{height: '15px'}}/>
@@ -125,50 +124,38 @@ function App() {
                                     <AbsoluteRelativeSwitch showRelative={showRelative} setShowRelative={setShowRelative} mapState={mapState}/>
                                 </Col>
                                 <Col>
-                                    <ColorScale max={max} showRelative={showRelative} mapState={mapState}/>
+                                    <ColorScaleMap max={max} showRelative={showRelative} mapState={mapState}/>
                                 </Col>
                                     <Col span={24}>
                                         <div>
-                                            <Posts selectedId={selectedId} selectedHashtags={selectedHashtags} selectedCluster={selectedCluster}/>
+                                            <PostsView selectedId={selectedId} selectedHashtags={selectedHashtags} selectedCluster={selectedCluster}/>
                                         </div>
                                 </Col>
                                 </Row>
                             </Footer>
                             </Layout>
                             <Sider  width={Sizes.siderWidth} >
-
                                 <Card>
-                                    <Tabs defaultActiveKey="1" id="mytabs">
-
+                                    <Tabs defaultActiveKey="1" id="tabs">
                                         <TabPane tab="About" key={1}>
-                                            <span>
-                                                {Texts.about}
-                                            </span>
-                                            <HistogramBox countsPerQuarter={countsPerQuarter} max={max} setSelectedId={setSelectedId}></HistogramBox>
+                                            <AboutTab countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId}/>
                                         </TabPane>
-
                                         <TabPane tab="Explore hashtags" key={2}>
-                                            <HashtagSelect addHashtag={addHashtag}/>
-                                            {selectedHashtags.length > 0 || selectedCluster ? (
-                                            <SkylineBox countsPerQuarter={countsPerQuarter} max={max} selectedId={selectedId} setSelectedId={setSelectedId} selectedHashtags={selectedHashtags} selectedCluster={selectedCluster} ></SkylineBox>
-                                            ) :
-                                                (
-                                                    <div>
-                                                        <br/>
-                                                        <div><b>{Texts.selectAHashtag}</b></div>
-                                                    </div>
-                                                )
-
-                                            }
+                                            <HashtagsTab countsPerQuarter={countsPerQuarter}
+                                                         max={max}
+                                                         selectedId={selectedId}
+                                                         setSelectedId={setSelectedId}
+                                                         selectedHashtags={selectedHashtags}
+                                                         selectedCluster={selectedCluster}
+                                                         addHashtag={addHashtag}/>
                                         </TabPane>
                                         <TabPane tab="Explore districts" key={3}>
-                                                    <ClustersBox selectedId={selectedId} setSelectedId={setSelectedId}
-                                                                 selectedHashtags={selectedHashtags}
-                                                                 addHashtag={addHashtag}
-                                                                 removeHashtag={removeHashtag}
-                                                                 selectedCluster={selectedCluster}
-                                                                 setSelectedCluster={setSelectedCluster}/>
-
+                                            <DistrictsTab selectedId={selectedId} setSelectedId={setSelectedId}
+                                                          selectedHashtags={selectedHashtags}
+                                                          addHashtag={addHashtag}
+                                                          removeHashtag={removeHashtag}
+                                                          selectedCluster={selectedCluster}
+                                                          setSelectedCluster={setSelectedCluster}/>
                                         </TabPane>
                                     </Tabs>
                                 </Card>

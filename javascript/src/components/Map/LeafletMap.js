@@ -32,9 +32,6 @@ const LeafletMap = ({potatoesWithOpacity, setSelectedId, selectedId, mapState})=
     });
 
     const selectFeature = (e=> {
-        console.log('SELECT FEATURE');
-        console.log(e.target.feature.id);
-        console.log(e.target.feature.id === selectedId);
         if (e.target.feature.id === selectedId) {
             setSelectedId(undefined);
         } else {
