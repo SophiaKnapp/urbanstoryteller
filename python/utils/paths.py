@@ -61,6 +61,17 @@ def QUARTER_CLEANED_RESULTS(quarter):
     path = os.path.join(POTATOES_CLEANED_DIR, quarter + '.csv')
     return read_result_csv(path)
 
+def QUARTERS_DICT(n=-1):
+    potatoes = POTATOES_LIST()
+    if n<0:
+        n = len(potatoes)
+    quarters = {}
+    potatoes = potatoes[:n]
+    for quarter in potatoes:
+        print ('>> now loading:', quarter)
+        quarters[quarter] = QUARTER_CLEANED_RESULTS(quarter)
+    return quarters
+
 def make_dirs():
   dirs = [HASHTAGS_PER_USER_DIR, POSTS_DIR_JSON, CLUSTERS_DIR_JSON, HASHTAG_FREQUENCY_DIR_JSON, CLUSTERS_DIR_JSON, HASHTAG_TOP_DIR, POTATOES_CLEANED_DIR, CLEANED_DIR, HASHTAG_FREQUENCY_DIR, GREEDY_MODULARITY_DIR, HASHTAG_FREQUENCY_DIR_ALL]
   for dir in dirs: 
