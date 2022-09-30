@@ -10,8 +10,6 @@ More information can be found in the respective `README.md` files of the two sub
 
 The final application can be found under [urbanstorytellermunich.web.app](https://urbanstorytellermunich.web.app/)
 
-## Adaptation of the Urban Story Teller to a different location
-
 
 
 
